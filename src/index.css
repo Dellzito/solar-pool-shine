@@ -1,139 +1,127 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+  QG Forças Especiais da Leaf — Design System
+  Dark premium tactical theme. Sutil identidade ninja (Konoha).
+  Tudo HSL. Sem cores diretas em componentes.
+*/
+
 @layer base {
   :root {
-    --background: 200 20% 98%;
-    --foreground: 215 50% 15%;
+    /* Dark é o padrão deste app */
+    --background: 222 33% 7%;            /* slate-950 ninja */
+    --foreground: 210 30% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 215 50% 15%;
+    --card: 222 28% 11%;                 /* surface */
+    --card-foreground: 210 30% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 50% 15%;
+    --popover: 222 30% 9%;
+    --popover-foreground: 210 30% 96%;
 
-    --primary: 215 70% 25%;
-    --primary-foreground: 0 0% 100%;
+    /* Azul profundo Konoha — navegação */
+    --primary: 215 75% 55%;
+    --primary-foreground: 222 47% 8%;
 
-    --secondary: 185 60% 45%;
-    --secondary-foreground: 0 0% 100%;
+    /* Cinza tático */
+    --secondary: 222 20% 18%;
+    --secondary-foreground: 210 25% 92%;
 
-    --muted: 200 20% 94%;
-    --muted-foreground: 215 15% 45%;
+    --muted: 222 20% 14%;
+    --muted-foreground: 215 15% 62%;
 
-    --accent: 45 95% 55%;
-    --accent-foreground: 215 50% 15%;
+    /* Vermelho discreto Leaf */
+    --accent: 0 72% 52%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 200 20% 90%;
-    --input: 200 20% 90%;
-    --ring: 215 70% 25%;
+    /* Verde sucesso */
+    --success: 142 60% 45%;
+    --success-foreground: 0 0% 100%;
+
+    /* Amarelo alerta */
+    --warning: 42 95% 55%;
+    --warning-foreground: 222 47% 8%;
+
+    --border: 222 20% 18%;
+    --input: 222 22% 16%;
+    --ring: 215 75% 55%;
 
     --radius: 0.75rem;
 
-    --hero-gradient: linear-gradient(135deg, hsl(215 70% 20%) 0%, hsl(200 60% 30%) 50%, hsl(185 60% 35%) 100%);
-    --water-gradient: linear-gradient(180deg, hsl(195 80% 92%) 0%, hsl(200 60% 96%) 100%);
-    --cta-gradient: linear-gradient(135deg, hsl(45 95% 50%) 0%, hsl(35 95% 55%) 100%);
-    --navy-gradient: linear-gradient(180deg, hsl(215 70% 20%) 0%, hsl(215 70% 30%) 100%);
+    /* Gradientes táticos */
+    --gradient-tactical: linear-gradient(135deg, hsl(222 40% 10%) 0%, hsl(222 33% 7%) 50%, hsl(215 50% 12%) 100%);
+    --gradient-leaf: linear-gradient(135deg, hsl(0 72% 52%) 0%, hsl(15 80% 50%) 100%);
+    --gradient-konoha: linear-gradient(135deg, hsl(215 75% 55%) 0%, hsl(215 70% 35%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(222 28% 12%) 0%, hsl(222 28% 10%) 100%);
 
-    --shadow-soft: 0 4px 20px -4px hsl(215 70% 25% / 0.15);
-    --shadow-card: 0 8px 30px -8px hsl(215 70% 25% / 0.12);
-    --shadow-cta: 0 8px 25px -5px hsl(45 95% 50% / 0.4);
+    --shadow-tactical: 0 8px 30px -10px hsl(0 0% 0% / 0.6);
+    --shadow-glow-red: 0 0 24px -4px hsl(0 72% 52% / 0.35);
+    --shadow-glow-blue: 0 0 24px -4px hsl(215 75% 55% / 0.35);
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 222 35% 6%;
+    --sidebar-foreground: 215 18% 75%;
+    --sidebar-primary: 0 72% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 25% 12%;
+    --sidebar-accent-foreground: 210 30% 96%;
+    --sidebar-border: 222 22% 14%;
+    --sidebar-ring: 215 75% 55%;
+  }
+
+  /* Light mode mantido por compatibilidade — não usado neste app */
+  .light {
+    --background: 210 25% 97%;
+    --foreground: 222 47% 11%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
+  * { @apply border-border; }
+  html, body, #root { @apply min-h-screen; }
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-background text-foreground antialiased font-body;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+  h1, h2, h3, h4, h5, h6 { @apply font-heading tracking-tight; }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+  /* Scrollbar tática */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--background)); }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--secondary));
+    border-radius: 8px;
+    border: 2px solid hsl(var(--background));
   }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--accent) / 0.7); }
 }
 
 @layer utilities {
-  .text-gradient-hero {
-    background: var(--hero-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .bg-tactical { background: var(--gradient-tactical); }
+  .bg-leaf-gradient { background: var(--gradient-leaf); }
+  .bg-konoha-gradient { background: var(--gradient-konoha); }
+  .bg-card-gradient { background: var(--gradient-card); }
+  .shadow-tactical { box-shadow: var(--shadow-tactical); }
+  .shadow-glow-red { box-shadow: var(--shadow-glow-red); }
+  .shadow-glow-blue { box-shadow: var(--shadow-glow-blue); }
 
-  .bg-hero-gradient {
-    background: var(--hero-gradient);
+  /* Marca-d'água sutil símbolo da folha */
+  .leaf-watermark {
+    position: relative;
+    overflow: hidden;
   }
-
-  .bg-water-gradient {
-    background: var(--water-gradient);
-  }
-
-  .bg-cta-gradient {
-    background: var(--cta-gradient);
-  }
-
-  .bg-navy-gradient {
-    background: var(--navy-gradient);
-  }
-
-  .shadow-soft {
-    box-shadow: var(--shadow-soft);
-  }
-
-  .shadow-card {
-    box-shadow: var(--shadow-card);
-  }
-
-  .shadow-cta {
-    box-shadow: var(--shadow-cta);
-  }
-
-  .animate-float {
-    animation: float 4s ease-in-out infinite;
-  }
-
-  .animate-shimmer {
-    animation: shimmer 2.5s ease-in-out infinite;
-  }
-
-  .animate-pulse-soft {
-    animation: pulse-soft 2s ease-in-out infinite;
+  .leaf-watermark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 90% 10%, hsl(var(--accent) / 0.08), transparent 40%);
+    pointer-events: none;
   }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes shimmer {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-@keyframes pulse-soft {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-}
-
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
